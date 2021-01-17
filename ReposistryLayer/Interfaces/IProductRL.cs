@@ -5,9 +5,8 @@ using System.Text;
 
 namespace ReposistryLayer.Interfaces
 {
-    public interface IUserRL
+    public interface IProductRL
     {
-        bool Register(UserRegistration register);
-        UserRegistration login(UserLogin registration);
+        List<Product> GetALLProducts();
     }
 }

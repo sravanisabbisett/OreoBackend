@@ -5,9 +5,8 @@ using System.Text;
 
 namespace CommonLayer.Models
 {
-    public class UserLogin
+    public class AdminLogin
     {
-        
         [Required]
         public string Email { get; set; }
         [Required]

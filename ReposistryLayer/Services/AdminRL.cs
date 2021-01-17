@@ -9,18 +9,16 @@ using System.Text;
 
 namespace ReposistryLayer.Services
 {
-    public class UserRL : IUserRL
+    public class AdminRL : IAdminRL
     {
         public SqlConnection connection;
 
         public readonly IConfiguration configuration;
-        public UserRL(IConfiguration configuration)
+        public AdminRL(IConfiguration configuration)
         {
             this.configuration = configuration;
             connection = new SqlConnection(this.configuration.GetConnectionString("OreoContext"));
         }
-
-       
 
         public static string Encryptdata(string password)
         {
@@ -42,23 +40,23 @@ namespace ReposistryLayer.Services
             decryptpwd = new String(decoded_char);
             return decryptpwd;
         }
-        public bool Register(UserRegistration register)
+
+        public bool AdminRegister(AdminRegistration registration)
         {
-            //SqlConnection connection = new SqlConnection(connectionString);
             try
             {
                 using (this.connection)
                 {
-                    var password = Encryptdata(register.Password);
-                    SqlCommand sqlCommand = new SqlCommand("SPregisterUser", this.connection);
-                    sqlCommand.CommandType = CommandType.StoredProcedure;
-                    sqlCommand.Parameters.AddWithValue("@Fullname", register.FullName);
-                    sqlCommand.Parameters.AddWithValue("@Email", register.Email);
-                    sqlCommand.Parameters.AddWithValue("@Password", password);
-                    sqlCommand.Parameters.AddWithValue("@MobileNumber", register.MobileNumber);
+                    var password = Encryptdata(registration.Password);
+                    SqlCommand command = new SqlCommand("spAdminRegister", this.connection);
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@FullName", registration.FullName);
+                    command.Parameters.AddWithValue("@Email", registration.Email);
+                    command.Parameters.AddWithValue("@Password", password);
+                    command.Parameters.AddWithValue("@MobileNumber", registration.MobileNumber);
                     this.connection.Open();
-                    int result = sqlCommand.ExecuteNonQuery();
-                    if (result != 0)
+                    var result = command.ExecuteNonQuery();
+                    if (result > 0)
                     {
                         return true;
                     }
@@ -66,7 +64,6 @@ namespace ReposistryLayer.Services
                     {
                         return false;
                     }
-
                 }
             }
             catch(Exception e)
@@ -79,37 +76,33 @@ namespace ReposistryLayer.Services
             }
         }
 
-
-        public UserRegistration login(UserLogin user)
+        public AdminRegistration AdminLogin(AdminLogin adminLogin)
         {
-            List<UserRegistration> users = new List<UserRegistration>();
-            UserRegistration registration = new UserRegistration();
+            AdminRegistration adminRegistration = new AdminRegistration();
             try
             {
                 using (this.connection)
                 {
-                    
-                    var password = Encryptdata(user.Password);
-                    SqlCommand command = new SqlCommand("splogin", this.connection);
+                    var password = Encryptdata(adminLogin.Password);
+                    SqlCommand command = new SqlCommand("spAdminLogin", this.connection);
                     command.CommandType = CommandType.StoredProcedure;
-                    command.Parameters.AddWithValue("@Email", user.Email);
-                    command.Parameters.AddWithValue("@password", password);
+                    command.Parameters.AddWithValue("@Email", adminLogin.Email);
+                    command.Parameters.AddWithValue("@Password", password);
                     this.connection.Open();
                     SqlDataReader dataReader = command.ExecuteReader();
                     if (dataReader.HasRows)
                     {
                         while (dataReader.Read())
                         {
-                            registration.UserId = dataReader.GetInt32(0);
-                            registration.FullName = dataReader.GetString(1);
-                            registration.Email = dataReader.GetString(2);
-                            registration.Password = dataReader.GetString(3);
-                            registration.MobileNumber = dataReader.GetString(4);
+                            adminRegistration.AdminId = dataReader.GetInt32(0);
+                            adminRegistration.FullName = dataReader.GetString(1);
+                            adminRegistration.Email = dataReader.GetString(2);
+                            adminRegistration.Password = dataReader.GetString(3);
+                            adminRegistration.MobileNumber = dataReader.GetString(4);
                         }
                     }
-                
                 }
-                return registration;
+                return adminRegistration;
             }
             catch(Exception e)
             {

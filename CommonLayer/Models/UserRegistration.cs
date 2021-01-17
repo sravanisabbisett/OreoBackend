@@ -8,19 +8,16 @@ namespace CommonLayer.Models
 {
     public class UserRegistration
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int UserId { get; set; }
         [Required]
         public string FullName { get; set; }
-
         [Required]
         public string Email { get; set; }
-
         [Required]
         public string Password { get; set; }
-
         [Required]
         public string MobileNumber { get; set; }
+
+        
     }
 }

@@ -5,9 +5,8 @@ using System.Text;
 
 namespace BusinessLayer.Interfaces
 {
-    public interface IUserBL
+    public interface IProductBL
     {
-        bool userRegister(UserRegistration userRegistration);
-        UserRegistration Login(UserLogin registration);
+        List<Product> GetAllProducts();
     }
 }

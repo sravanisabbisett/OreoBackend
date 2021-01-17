@@ -36,6 +36,10 @@ namespace Oreo_Backend
             var key = Encoding.UTF8.GetBytes(Configuration["Key"]);
             services.AddTransient<IUserBL, UserBL>();
             services.AddTransient<IUserRL, UserRL>();
+            services.AddTransient<IAdminBL, AdminBL>();
+            services.AddTransient<IAdminRL, AdminRL>();
+            services.AddTransient<IProductBL, ProductBL>();
+            services.AddTransient<IProductRL, ProductRL>();
 
             services.AddAuthentication(x =>
             {

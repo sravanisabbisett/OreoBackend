@@ -7,20 +7,20 @@ using System.Text;
 
 namespace BusinessLayer.Services
 {
-    public class UserBL : IUserBL
+    public class AdminBL : IAdminBL
     {
-        private readonly IUserRL userRL;
+        private readonly IAdminRL adminRL;
 
-        public UserBL(IUserRL userRL)
+        public AdminBL(IAdminRL adminRL)
         {
-            this.userRL = userRL;
+            this.adminRL = adminRL;
         }
 
-        public bool userRegister(UserRegistration userRegistration)
+        public bool AdminRegister(AdminRegistration registration)
         {
             try
             {
-                return this.userRL.Register(userRegistration);
+                return this.adminRL.AdminRegister(registration);
             }
             catch(Exception e)
             {
@@ -28,11 +28,12 @@ namespace BusinessLayer.Services
             }
         }
 
-        public UserRegistration Login(UserLogin user)
+
+        public AdminRegistration AdminLogin(AdminLogin adminLogin)
         {
             try
             {
-                return this.userRL.login(user);
+                return this.adminRL.AdminLogin(adminLogin);
             }
             catch(Exception e)
             {
