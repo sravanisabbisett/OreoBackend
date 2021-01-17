@@ -25,7 +25,6 @@ namespace ReposistryLayer.Services
         public List<Product> GetALLProducts()
         {
             List<Product> productList = new List<Product>();
-            Product product = new Product();
             try
             {
                 using (this.connection)
@@ -38,6 +37,7 @@ namespace ReposistryLayer.Services
                     {
                         while (reader.Read())
                         {
+                            Product product = new Product();
                             product.ProductId = reader.GetInt32(0);
                             product.ProductName = reader.GetString(1);
                             product.ActualPrice = reader.GetDouble(2);
@@ -46,9 +46,10 @@ namespace ReposistryLayer.Services
                             product.ProductImage = reader.GetString(5);
                             product.AddedToCart = reader.GetBoolean(6);
                             productList.Add(product);
-                        }
 
+                        }
                     }
+                    
                 }
                 return productList;
             }

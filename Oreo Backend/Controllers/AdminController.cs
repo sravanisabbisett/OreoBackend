@@ -12,7 +12,6 @@ namespace Oreo_Backend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-
     public class AdminController : ControllerBase
     {
         private readonly IAdminBL adminBL;
