@@ -63,7 +63,7 @@ namespace Oreo_Backend
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1.0", new Info { Title = "EMS", Version = "v1.0", Description = "Book store" });
+                c.SwaggerDoc("v1.0", new Info { Title = "OMS", Version = "v1.0", Description = "Oreo" });
                 //   c.OperationFilter<FileUploadedOperation>(); ////Register File Upload Operation Filter
                 //c.DescribeAllEnumsAsStrings();
                 c.AddSecurityDefinition("Bearer", new ApiKeyScheme
@@ -105,7 +105,7 @@ namespace Oreo_Backend
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1.0/swagger.json", "bookstore (V 1.0)");
+                c.SwaggerEndpoint("/swagger/v1.0/swagger.json", "Oreo (V 1.0)");
             });
             app.UseAuthentication();
             app.UseMvc();

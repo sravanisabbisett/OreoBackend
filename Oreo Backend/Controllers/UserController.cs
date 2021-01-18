@@ -65,7 +65,7 @@ namespace Oreo_Backend.Controllers
                 var result = this.userBL.Login(login);
                 if (result != null)
                 {
-                    string token = GenrateJWTToken(result.Email, result.UserId);
+                    string token = GenrateJWTToken(result.Email, result.UserId,result.Role);
                     return this.Ok(new
                     {
                         success = true,
@@ -88,7 +88,7 @@ namespace Oreo_Backend.Controllers
         }
 
 
-        private string GenrateJWTToken(string email, long id)
+        private string GenrateJWTToken(string email, long id,string Role)
         {
             var secretkey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Key"]));
             var signinCredentials = new SigningCredentials(secretkey, SecurityAlgorithms.HmacSha256);
@@ -96,7 +96,7 @@ namespace Oreo_Backend.Controllers
             var claims = new List<Claim>
                         {
                             new Claim("email", email),
-                            //new Claim(ClaimTypes.Role, Role),
+                            new Claim(ClaimTypes.Role, Role),
                             new Claim("id",userId),
 
                         };

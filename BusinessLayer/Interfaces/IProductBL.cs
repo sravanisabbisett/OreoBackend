@@ -8,5 +8,6 @@ namespace BusinessLayer.Interfaces
     public interface IProductBL
     {
         List<Product> GetAllProducts();
+        bool AddProduct(Product product);
     }
 }

@@ -8,6 +8,6 @@ namespace BusinessLayer.Interfaces
     public interface IUserBL
     {
         bool userRegister(UserRegistration userRegistration);
-        UserRegistration Login(UserLogin registration);
+        UserResponse Login(UserLogin registration);
     }
 }

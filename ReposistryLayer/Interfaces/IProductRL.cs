@@ -8,5 +8,6 @@ namespace ReposistryLayer.Interfaces
     public interface IProductRL
     {
         List<Product> GetALLProducts();
+        bool AddProduct(Product product);
     }
 }

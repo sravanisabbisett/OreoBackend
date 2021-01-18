@@ -8,6 +8,6 @@ namespace ReposistryLayer.Interfaces
     public interface IUserRL
     {
         bool Register(UserRegistration register);
-        UserRegistration login(UserLogin registration);
+        UserResponse login(UserLogin registration);
     }
 }

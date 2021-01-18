@@ -62,5 +62,41 @@ namespace ReposistryLayer.Services
                 this.connection.Close();
             }
         }
+
+        public bool AddProduct(Product product)
+        {
+            try
+            {
+                using (this.connection)
+                {
+                    SqlCommand command = new SqlCommand("SpProduct", this.connection);
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@ProductName", product.ProductName);
+                    command.Parameters.AddWithValue("@ActualPrice", product.ActualPrice);
+                    command.Parameters.AddWithValue("@DiscountPrice", product.DiscountPrice);
+                    command.Parameters.AddWithValue("@ProductQunatity", product.ProductQuantity);
+                    command.Parameters.AddWithValue("@ProductImage", product.ProductImage);
+                    command.Parameters.AddWithValue("@AddedToCart", "0");
+                    this.connection.Open();
+                    var result = command.ExecuteNonQuery();
+                    if (result > 0)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+            catch(Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                this.connection.Close();
+            }
+        }
     }
 }

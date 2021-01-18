@@ -56,6 +56,7 @@ namespace ReposistryLayer.Services
                     sqlCommand.Parameters.AddWithValue("@Email", register.Email);
                     sqlCommand.Parameters.AddWithValue("@Password", password);
                     sqlCommand.Parameters.AddWithValue("@MobileNumber", register.MobileNumber);
+                    sqlCommand.Parameters.AddWithValue("@Role", "User");
                     this.connection.Open();
                     int result = sqlCommand.ExecuteNonQuery();
                     if (result != 0)
@@ -80,10 +81,10 @@ namespace ReposistryLayer.Services
         }
 
 
-        public UserRegistration login(UserLogin user)
+        public UserResponse login(UserLogin user)
         {
             List<UserRegistration> users = new List<UserRegistration>();
-            UserRegistration registration = new UserRegistration();
+            UserResponse registration = new UserResponse();
             try
             {
                 using (this.connection)
@@ -105,11 +106,13 @@ namespace ReposistryLayer.Services
                             registration.Email = dataReader.GetString(2);
                             registration.Password = dataReader.GetString(3);
                             registration.MobileNumber = dataReader.GetString(4);
+                            registration.Role = dataReader.GetString(5);
                         }
+                        return registration;
                     }
                 
                 }
-                return registration;
+                return null;
             }
             catch(Exception e)
             {

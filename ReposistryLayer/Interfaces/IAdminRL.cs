@@ -8,6 +8,6 @@ namespace ReposistryLayer.Interfaces
     public interface IAdminRL
     {
         bool AdminRegister(AdminRegistration registration);
-        AdminRegistration AdminLogin(AdminLogin adminLogin);
+        AdminResponse AdminLogin(AdminLogin adminLogin);
     }
 }

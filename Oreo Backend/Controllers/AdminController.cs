@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 using BusinessLayer.Interfaces;
 using CommonLayer.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Oreo_Backend.Controllers
 {
@@ -61,13 +65,13 @@ namespace Oreo_Backend.Controllers
                 var result = this.adminBL.AdminLogin(login);
                 if (result != null)
                 {
-                    //string token = GenrateJWTToken(result.Email, result.UserId);
+                    string token = GenrateJWTToken(result.Email, result.AdminId,result.Role);
                     return this.Ok(new
                     {
                         success = true,
                         Message = "Admin login successfully",
                         Data = result,
-                        //Token = token
+                        Token = token
                     });
                 }
                 else
@@ -81,6 +85,28 @@ namespace Oreo_Backend.Controllers
                 return this.BadRequest(new { success = false, Message = e.Message });
 
             }
+        }
+
+        private string GenrateJWTToken(string email, long id,string Role)
+        {
+            var secretkey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Key"]));
+            var signinCredentials = new SigningCredentials(secretkey, SecurityAlgorithms.HmacSha256);
+            string userId = Convert.ToString(id);
+            var claims = new List<Claim>
+                        {
+                            new Claim("email", email),
+                            new Claim(ClaimTypes.Role, Role),
+                            new Claim("id",userId),
+
+                        };
+            var tokenOptionOne = new JwtSecurityToken(
+
+                claims: claims,
+                expires: DateTime.Now.AddMinutes(30),
+                signingCredentials: signinCredentials
+                );
+            string token = new JwtSecurityTokenHandler().WriteToken(tokenOptionOne);
+            return token;
         }
     }
 }

@@ -54,6 +54,7 @@ namespace ReposistryLayer.Services
                     command.Parameters.AddWithValue("@Email", registration.Email);
                     command.Parameters.AddWithValue("@Password", password);
                     command.Parameters.AddWithValue("@MobileNumber", registration.MobileNumber);
+                    command.Parameters.AddWithValue("@Role", "Admin");
                     this.connection.Open();
                     var result = command.ExecuteNonQuery();
                     if (result > 0)
@@ -76,9 +77,9 @@ namespace ReposistryLayer.Services
             }
         }
 
-        public AdminRegistration AdminLogin(AdminLogin adminLogin)
+        public AdminResponse AdminLogin(AdminLogin adminLogin)
         {
-            AdminRegistration adminRegistration = new AdminRegistration();
+            AdminResponse adminRegistration = new AdminResponse();
             try
             {
                 using (this.connection)
@@ -99,10 +100,12 @@ namespace ReposistryLayer.Services
                             adminRegistration.Email = dataReader.GetString(2);
                             adminRegistration.Password = dataReader.GetString(3);
                             adminRegistration.MobileNumber = dataReader.GetString(4);
+                            adminRegistration.Role = dataReader.GetString(5);
                         }
+                        return adminRegistration;
                     }
                 }
-                return adminRegistration;
+                return null;
             }
             catch(Exception e)
             {

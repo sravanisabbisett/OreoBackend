@@ -28,7 +28,7 @@ namespace BusinessLayer.Services
             }
         }
 
-        public UserRegistration Login(UserLogin user)
+        public UserResponse Login(UserLogin user)
         {
             try
             {

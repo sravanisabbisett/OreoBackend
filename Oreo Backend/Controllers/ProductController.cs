@@ -13,7 +13,6 @@ namespace Oreo_Backend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
     public class ProductController : ControllerBase
     {
         private readonly IProductBL productBL;
@@ -27,6 +26,7 @@ namespace Oreo_Backend.Controllers
 
 
         [HttpGet("GetProducts")]
+        [Authorize(Roles ="Admin,User")]
         public IActionResult GetAllProducts()
         {
             try
@@ -44,6 +44,38 @@ namespace Oreo_Backend.Controllers
             catch (Exception e)
             {
                 return this.BadRequest(new { success = false, Message = e.Message });
+            }
+        }
+        
+
+        [HttpPost("AddProduct")]
+        [Authorize(Roles ="Admin")]
+        public IActionResult AddProduct(Product product)
+        {
+            try
+            {
+                if (this.productBL.AddProduct(product))
+                {
+                    return this.Ok(new { success = true, Message = "Product added successfully" });
+                }
+                else
+                {
+                    return StatusCode(StatusCodes.Status500InternalServerError,
+                       new { success = false, Message = "product is not added " });
+                }
+            }
+            catch (Exception exception)
+            {
+                if (exception != null)
+                {
+                    return StatusCode(StatusCodes.Status409Conflict,
+                        new { success = false, ErrorMessage = "Product not added sucessfully" });
+                }
+                else
+                {
+                    return this.BadRequest(new { success = false, Message = exception.Message });
+                }
+
             }
         }
     }

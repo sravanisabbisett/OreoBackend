@@ -16,12 +16,23 @@ namespace BusinessLayer.Services
             this.productRL = productRL;
         }
 
-
         public List<Product> GetAllProducts()
         {
             try
             {
                 return this.productRL.GetALLProducts();
+            }
+            catch(Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public bool AddProduct(Product product)
+        {
+            try
+            {
+                return this.productRL.AddProduct(product);
             }
             catch(Exception e)
             {
