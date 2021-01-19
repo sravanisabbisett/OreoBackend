@@ -27,19 +27,19 @@ namespace Oreo_Backend.Controllers
             this.configuration = configuration;
         }
 
-        [HttpPost("Register")]
+        [HttpPost]
         public IActionResult RegisterUser(UserRegistration user)
         {
             try
             {
                 if (this.userBL.userRegister(user))
                 {
-                    return this.Ok(new { success = true, Message = "user record added successfully" });
+                    return this.Ok(new { Success = true, Message = "user record added successfully" });
                 }
                 else
                 {
                     return StatusCode(StatusCodes.Status500InternalServerError,
-                        new { success = false, Message = "user record is not added " });
+                        new { Success = false, Message = "user record is not added " });
                 }
             }
             catch (Exception exception)
@@ -47,7 +47,7 @@ namespace Oreo_Backend.Controllers
                 if (exception != null)
                 {
                     return StatusCode(StatusCodes.Status409Conflict,
-                        new { success = false, ErrorMessage = "Cannot insert duplicate Email values." });
+                        new { Success = false, ErrorMessage = "Cannot insert duplicate Email values." });
                 }
                 else
                 {
@@ -76,13 +76,13 @@ namespace Oreo_Backend.Controllers
                 }
                 else
                 {
-                    return this.NotFound(new { success = false, Message = "User login unsuccessfully" });
+                    return this.NotFound(new { Success = false, Message = "User login unsuccessfully" });
                 }
             }
             catch (Exception e)
             {
 
-                return this.BadRequest(new { success = false, Message = e.Message });
+                return this.BadRequest(new { Success = false, Message = e.Message });
 
             }
         }

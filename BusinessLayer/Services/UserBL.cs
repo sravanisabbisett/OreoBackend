@@ -1,6 +1,6 @@
 ﻿using BusinessLayer.Interfaces;
 using CommonLayer.Models;
-using ReposistryLayer.Interfaces;
+using RepositoryLayer.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;

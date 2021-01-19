@@ -1,10 +1,14 @@
-﻿using CommonLayer.Models;
+﻿using CloudinaryDotNet;
+using CloudinaryDotNet.Actions;
+using CommonLayer.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
-using ReposistryLayer.Interfaces;
+using RepositoryLayer.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Security.Principal;
 using System.Text;
 
 namespace ReposistryLayer.Services
@@ -97,6 +101,26 @@ namespace ReposistryLayer.Services
             {
                 this.connection.Close();
             }
+        }
+
+        public string Image(IFormFile file,int productId)
+        {
+            if (file == null)
+            {
+                return "file is null";
+            }
+            var stream = file.OpenReadStream();
+            var name = file.FileName;
+            Account account = new Account("dxnkfm0yf", "457942652347455", "i7aM8g6weWTzOiLIUNLAB7Vygv4");
+            Cloudinary cloudinary = new Cloudinary(account);
+            var uploadParams = new ImageUploadParams()
+            {
+                File = new FileDescription(name, stream)
+            };
+            ImageUploadResult uploadResult = cloudinary.Upload(uploadParams);
+            cloudinary.Api.UrlImgUp.BuildUrl(String.Format("{0}.{1}", uploadResult.PublicId, uploadResult.Format));
+            var data= uploadResult.Uri.ToString();
+            return data;
         }
     }
 }

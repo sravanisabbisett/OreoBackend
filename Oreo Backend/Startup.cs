@@ -15,8 +15,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using ReposistryLayer.Interfaces;
 using ReposistryLayer.Services;
+using RepositoryLayer.Interfaces;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace Oreo_Backend

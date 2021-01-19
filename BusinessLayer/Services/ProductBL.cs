@@ -1,6 +1,7 @@
 ﻿using BusinessLayer.Interfaces;
 using CommonLayer.Models;
-using ReposistryLayer.Interfaces;
+using Microsoft.AspNetCore.Http;
+using RepositoryLayer.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -33,6 +34,18 @@ namespace BusinessLayer.Services
             try
             {
                 return this.productRL.AddProduct(product);
+            }
+            catch(Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public string Image(IFormFile file, int productId)
+        {
+            try
+            {
+                return this.productRL.Image(file, productId);
             }
             catch(Exception e)
             {

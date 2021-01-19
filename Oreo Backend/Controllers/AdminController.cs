@@ -27,19 +27,19 @@ namespace Oreo_Backend.Controllers
             this.configuration = configuration;
         }
 
-        [HttpPost("AdminRegister")]
+        [HttpPost]
         public IActionResult AdminRegister(AdminRegistration adminRegistration)
         {
             try
             {
                 if (this.adminBL.AdminRegister(adminRegistration))
                 {
-                    return this.Ok(new { success = true, Message = "Admin record added successfully" });
+                    return this.Ok(new { Success = true, Message = "Admin record added successfully" });
                 }
                 else
                 {
                     return StatusCode(StatusCodes.Status500InternalServerError,
-                       new { success = false, Message = "Admin record is not added " });
+                       new { Success = false, Message = "Admin record is not added " });
                 }
             }
             catch (Exception exception)
@@ -47,11 +47,11 @@ namespace Oreo_Backend.Controllers
                 if (exception != null)
                 {
                     return StatusCode(StatusCodes.Status409Conflict,
-                        new { success = false, ErrorMessage = "Cannot insert duplicate Email values." });
+                        new { Success = false, ErrorMessage = "Cannot insert duplicate Email values." });
                 }
                 else
                 {
-                    return this.BadRequest(new { success = false, Message = exception.Message });
+                    return this.BadRequest(new { Success = false, Message = exception.Message });
                 }
 
             }
@@ -76,13 +76,13 @@ namespace Oreo_Backend.Controllers
                 }
                 else
                 {
-                    return this.NotFound(new { success = false, Message = "Admin login unsuccessfully" });
+                    return this.NotFound(new { Success = false, Message = "Admin login unsuccessfully" });
                 }
             }
             catch (Exception e)
             {
 
-                return this.BadRequest(new { success = false, Message = e.Message });
+                return this.BadRequest(new { Success = false, Message = e.Message });
 
             }
         }

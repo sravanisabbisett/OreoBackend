@@ -1,6 +1,6 @@
 ﻿using CommonLayer.Models;
 using Microsoft.Extensions.Configuration;
-using ReposistryLayer.Interfaces;
+using RepositoryLayer.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -22,7 +22,7 @@ namespace ReposistryLayer.Services
 
        
 
-        public static string Encryptdata(string password)
+        internal static string Encryptdata(string password)
         {
             string strmsg = string.Empty;
             byte[] encode = new byte[password.Length];
@@ -30,7 +30,7 @@ namespace ReposistryLayer.Services
             strmsg = Convert.ToBase64String(encode);
             return strmsg;
         }
-        public static string Decryptdata(string encryptpwd)
+        internal static string Decryptdata(string encryptpwd)
         {
             string decryptpwd = string.Empty;
             UTF8Encoding encodepwd = new UTF8Encoding();

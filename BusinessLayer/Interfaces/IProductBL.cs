@@ -1,4 +1,5 @@
 ﻿using CommonLayer.Models;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,5 +10,6 @@ namespace BusinessLayer.Interfaces
     {
         List<Product> GetAllProducts();
         bool AddProduct(Product product);
+        string Image(IFormFile file, int productId);
     }
 }

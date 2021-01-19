@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.1300
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oreo Backend", "Oreo Backend\Oreo Backend.csproj", "{40A3D01F-D4FB-4CF3-8A56-45D92D12F27A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Oreo Backend", "Oreo Backend\Oreo Backend.csproj", "{40A3D01F-D4FB-4CF3-8A56-45D92D12F27A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLayer", "BusinessLayer\BusinessLayer.csproj", "{2955807B-904B-4F98-885A-AF2761B5828E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessLayer", "BusinessLayer\BusinessLayer.csproj", "{2955807B-904B-4F98-885A-AF2761B5828E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommonLayer", "CommonLayer\CommonLayer.csproj", "{713649A1-0DE6-4C47-9572-8679C38C2DFF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommonLayer", "CommonLayer\CommonLayer.csproj", "{713649A1-0DE6-4C47-9572-8679C38C2DFF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReposistryLayer", "ReposistryLayer\ReposistryLayer.csproj", "{56DC3D8D-F538-4F69-9544-73B4E7EAEEB8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RepositoryLayer", "ReposistryLayer\RepositoryLayer.csproj", "{56DC3D8D-F538-4F69-9544-73B4E7EAEEB8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

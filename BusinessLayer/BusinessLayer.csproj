@@ -6,7 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CommonLayer\CommonLayer.csproj" />
-    <ProjectReference Include="..\ReposistryLayer\ReposistryLayer.csproj" />
+    <ProjectReference Include="..\ReposistryLayer\RepositoryLayer.csproj" />
   </ItemGroup>
 
 </Project>
